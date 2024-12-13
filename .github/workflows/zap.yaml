@@ -23,6 +23,7 @@ jobs:
   zap_scan:
     needs: build
     runs-on: ubuntu-latest
+    steps:
       - name: Setup dsvpwa
         run: |
           pwd
