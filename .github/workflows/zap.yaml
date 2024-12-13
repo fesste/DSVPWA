@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python 3.9
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
           python-version: "3.9"
 
@@ -28,9 +28,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/setup-python@v4
       - name: Setup dsvpwa
         run: |
-          pwd
           ls -l
           nohup python dsvpwa.py &
           sleep 5
