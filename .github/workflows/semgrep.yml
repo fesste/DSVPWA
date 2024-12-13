@@ -40,12 +40,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download PY
-        uses: actions/download-artifact@v4
-        with:
-          name: dsvpwa
-          path: target/
-
       - name: Setup dsvpwa
         run: |
           cp target/dsvpwa.py ./
