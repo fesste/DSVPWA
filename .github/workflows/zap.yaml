@@ -35,10 +35,9 @@ jobs:
         run: |
           pwd
           ls -l
-          chmod +x dsvpwa.py
           python ./dsvpwa.py
           sleep 5
-          curl -v http://localhost:65413 || true
+#          curl -v http://localhost:65413 || true
 
       - name: Prepare ZAP Environment
         run: |
