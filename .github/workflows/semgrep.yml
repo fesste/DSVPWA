@@ -42,7 +42,8 @@ jobs:
 
       - name: Setup dsvpwa
         run: |
-          cp target/dsvpwa.py ./
+          pwd; ls -l
+#          cp target/dsvpwa.py ./
           chmod +x dsvpwa.py
           python ./dsvpwa.py
           sleep 5
