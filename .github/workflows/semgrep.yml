@@ -40,13 +40,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+#      - name: Download PY
+#        uses: actions/download-artifact@v4
+#        with:
+#          name: dsvpwa
+#          path: target/
+
       - name: Setup dsvpwa
         run: |
-          pwd; ls -l; \
-#          cp target/dsvpwa.py ./
-          chmod +x dsvpwa.py \
-          python ./dsvpwa.py \
-          sleep 5 \
+          chmod +x dsvpwa.py
+          python ./dsvpwa.py
+          sleep 5
           curl -v http://localhost:65413 || true
 
       - name: Prepare ZAP Environment
