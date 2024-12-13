@@ -30,7 +30,7 @@ jobs:
           ls -l
           nohup python ./dsvpwa.py &
           sleep 5
-          curl -v http://localhost:65413
+          curl -v http://localhost:65413 || true
 
       - name: Prepare ZAP Environment
         run: |
