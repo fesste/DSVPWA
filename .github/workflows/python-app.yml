@@ -37,7 +37,7 @@ jobs:
     - name: Test with pytest
       run: |
         mv dsvpwa.py test_dsvpwa.py ; \
-        pytest -v test_dsvpwa.py --doctest-modules --junitxml=junit/test-results.xml ;\
+        pytest -vvv test_dsvpwa.py --doctest-modules --junitxml=junit/test-results.xml || true \
         mv test_dsvpwa.py dsvpwa.py ; true
 
     - name: Upload pytest test results
