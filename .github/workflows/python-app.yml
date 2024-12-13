@@ -37,7 +37,7 @@ jobs:
     - name: Test with pytest
       run: |
         pwd; ls -la; \
-        pytest -v dsvpwa --doctest-modules --junitxml=junit/test-results.xml || true
+        pytest -vvv dsvpwa.py --doctest-modules --junitxml=junit/test-results.xml || true
 
     - name: Upload pytest test results
       uses: actions/upload-artifact@v4
