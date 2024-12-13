@@ -58,7 +58,6 @@ jobs:
             --sarif || true
 #            --autofix || true
 
-
       # Scan code using project's configuration on https://semgrep.dev/manage
       - uses: returntocorp/semgrep-action@fcd5ab7459e8d91cb1777481980d1b18b4fc6735
         with:
@@ -77,7 +76,6 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: reports/semgrep-results.sarif
-
 
       - name: Upload Semgrep Results
         uses: actions/upload-artifact@v4
