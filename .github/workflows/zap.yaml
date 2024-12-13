@@ -35,7 +35,7 @@ jobs:
         run: |
           pwd
           ls -l
-          python ./dsvpwa.py
+          nohup python ./dsvpwa.py &
           sleep 5
 #          curl -v http://localhost:65413 || true
 
