@@ -7,37 +7,26 @@ on:
     branches: [ "main" ]
 
 permissions:
-  contents: read # for actions/checkout to fetch code
-  security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
-  pull-requests: write
-  actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
-
+  contents: read
 
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Set up Python 3.9
-        uses: actions/checkout@v4
-#        uses: actions/setup-python@v4
+        uses: actions/setup-python@v3
         with:
           python-version: "3.9"
 
-  zap_scan:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: python
-
-
       - name: Setup dsvpwa
-
         run: |
+          pwd
           ls -l
-          nohup python dsvpwa.py &
+          nohup python ./dsvpwa.py &
           sleep 5
-          curl -v http://localhost:65413 || true
+          curl -v http://localhost:65413
 
       - name: Prepare ZAP Environment
         run: |
@@ -58,35 +47,10 @@ jobs:
 
       - name: Upload ZAP Results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: zap-results
           path: |
             zap-*
             *.html
           retention-days: 5
-
-  publish_security_reports:
-    needs: [zap_scan]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Create reports directory
-        run: mkdir -p combined-reports
-
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: combined-reports
-
-      - name: Prepare reports
-        run: |
-          cd combined-reports
-          find . -type f -exec mv {} ./ \;
-          rm -rf */
-
-      - name: Archive Security Results
-        uses: actions/upload-artifact@v4
-        with:
-          name: security-reports-bundle
-          path: combined-reports/*
-          retention-days: 14
