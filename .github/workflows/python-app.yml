@@ -36,9 +36,9 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        find . -name "*pycache*" -type f ;\
-        pwd; ls -la; \
-        pytest -vvv dsvpwa.py --doctest-modules --junitxml=junit/test-results.xml || true
+        mv dsvpwa.py test_dsvpwa.py ; \
+        pytest -vvv dsvpwa.py --doctest-modules --junitxml=junit/test-results.xml ;\
+        mv test_dsvpwa.py dsvpwa.py ; true
 
     - name: Upload pytest test results
       uses: actions/upload-artifact@v4
