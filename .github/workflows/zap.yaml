@@ -43,7 +43,9 @@ jobs:
             --config "p/owasp-top-ten" \
             --output reports/semgrep-results.sarif \
             --sarif || true \
-            --autofix || true
+            --autofix || true \
+          ls -l ; ls -l reports || true
+          
 
       - name: Create Pull Request with fixes
         uses: peter-evans/create-pull-request@v5
