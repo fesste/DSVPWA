@@ -44,7 +44,7 @@ jobs:
             --output reports/semgrep-results.sarif \
             --sarif || true \
             --autofix || true \
-          ls -la ; echo "ls reports"; ls -la reports || true
+          pwd; ls -la ; echo "ls reports"; ls -la reports || true
           
 
       - name: Create Pull Request with fixes
