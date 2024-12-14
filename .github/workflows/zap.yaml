@@ -85,7 +85,7 @@ jobs:
           path: reports/semgrep-results.sarif
           retention-days: 14
 
-  zap:
+  zap_scan:
     needs: build
     runs-on: ubuntu-latest
     steps:
