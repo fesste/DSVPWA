@@ -42,7 +42,7 @@ jobs:
             --config "p/secrets" \
             --config "p/owasp-top-ten" \
             --output reports/semgrep-results.sarif \
-            --sarif || true \
+            --sarif || true
             --autofix || true
 
       - name: Create Pull Request with fixes
