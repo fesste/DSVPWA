@@ -44,7 +44,8 @@ jobs:
             --output reports/semgrep-results.sarif \
             --sarif || true \
             --autofix || true \
-          pwd; ls -la ; echo "ls reports"; ls -la reports || true
+          pwd; ls -la ; echo "ls reports"; ls -la reports \
+          ls -l reports/semgrep-results.sarif || true
           
 
       - name: Create Pull Request with fixes
@@ -173,6 +174,7 @@ jobs:
     steps:
       - name: Send notification
         uses: nvdaes/github-action-workflow-notification@v1
+#        uses: nvdaes/github-action-workflow-notification@v1
         with:
           notification_title: 'Security Scan Results'
           notification_body: |
