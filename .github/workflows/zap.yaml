@@ -42,7 +42,7 @@ jobs:
             --config "p/secrets" \
             --config "p/owasp-top-ten" \
             --output reports/semgrep-results.sarif \
-            --sarif || true
+            --sarif || true \
             --autofix || true
 
       - name: Create Pull Request with fixes
@@ -59,19 +59,19 @@ jobs:
           base: main
           delete-branch: true
 
-      # Scan code using project's configuration on https://semgrep.dev/manage
-      - uses: returntocorp/semgrep-action@fcd5ab7459e8d91cb1777481980d1b18b4fc6735
-        with:
-          publishToken: ${{ secrets.SEMGREP_APP_TOKEN }}
-          publishDeployment: ${{ secrets.SEMGREP_DEPLOYMENT_ID }}
-          generateSarif: "1"
-
-      # Upload SARIF file generated in previous step
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: semgrep.sarif
-        if: always()
+#      # Scan code using project's configuration on https://semgrep.dev/manage
+#      - uses: returntocorp/semgrep-action@fcd5ab7459e8d91cb1777481980d1b18b4fc6735
+#        with:
+#          publishToken: ${{ secrets.SEMGREP_APP_TOKEN }}
+#          publishDeployment: ${{ secrets.SEMGREP_DEPLOYMENT_ID }}
+#          generateSarif: "1"
+#
+#      # Upload SARIF file generated in previous step
+#      - name: Upload SARIF file
+#        uses: github/codeql-action/upload-sarif@v3
+#        with:
+#          sarif_file: semgrep.sarif
+#        if: always()
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
@@ -79,7 +79,7 @@ jobs:
           sarif_file: reports/semgrep-results.sarif
 
       - name: Upload Semgrep Results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: semgrep-results
           path: reports/semgrep-results.sarif
