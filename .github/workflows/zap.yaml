@@ -43,7 +43,21 @@ jobs:
             --config "p/owasp-top-ten" \
             --output reports/semgrep-results.sarif \
             --sarif || true
-      #            --autofix || true
+            --autofix || true
+
+      - name: Create Pull Request with fixes
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ github.token }}
+          commit-message: 'fix: auto-fixes from semgrep'
+          title: 'Semgrep Auto-fixes'
+          body: |
+            Автоматические исправления от Semgrep security scan         
+            Этот PR содержит автоматические исправления проблем безопасности, найденных Semgrep.
+            Пожалуйста, проверьте изменения перед merge.
+          branch: semgrep-fixes
+          base: main
+          delete-branch: true
 
       # Scan code using project's configuration on https://semgrep.dev/manage
       - uses: returntocorp/semgrep-action@fcd5ab7459e8d91cb1777481980d1b18b4fc6735
