@@ -166,24 +166,25 @@ jobs:
           name: |
             semgrep-results
             zap-results
+          fail_action: false
 
-  notify:
-    needs: [semgrep, zap_scan]
-    runs-on: ubuntu-latest
-    if: always()
-    steps:
-      - name: Send notification
-        uses: nvdaes/github-action-workflow-notification@v1
+#  notify:
+#    needs: [semgrep, zap_scan]
+#    runs-on: ubuntu-latest
+#    if: always()
+#    steps:
+#      - name: Send notification
 #        uses: nvdaes/github-action-workflow-notification@v1
-        with:
-          notification_title: 'Security Scan Results'
-          notification_body: |
-            Security scan completed for ${{github.repository}}
-            
-            Results summary:
-            - Semgrep scan: ${{needs.semgrep.result}}
-            - ZAP scan: ${{needs.zap_scan.result}}
-            
-            Check full results here:
-            ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
-          notification_type: 'email'
+##        uses: nvdaes/github-action-workflow-notification@v1
+#        with:
+#          notification_title: 'Security Scan Results'
+#          notification_body: |
+#            Security scan completed for ${{github.repository}}
+#
+#            Results summary:
+#            - Semgrep scan: ${{needs.semgrep.result}}
+#            - ZAP scan: ${{needs.zap_scan.result}}
+#
+#            Check full results here:
+#            ${{github.server_url}}/${{github.repository}}/actions/runs/${{github.run_id}}
+#          notification_type: 'email'
