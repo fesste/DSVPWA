@@ -43,30 +43,10 @@ jobs:
             --config "p/secrets" \
             --config "p/owasp-top-ten" \
             --output reports/semgrep-results.sarif \
-            --sarif || true \
-            --autofix || true \
-          pwd; ls -la ; echo "ls reports"; ls -la reports \
-          ls -l reports/semgrep-results.sarif || true
-          
-
-#      # Scan code using project's configuration on https://semgrep.dev/manage
-#      - uses: returntocorp/semgrep-action@fcd5ab7459e8d91cb1777481980d1b18b4fc6735
-#        with:
-#          publishToken: ${{ secrets.SEMGREP_APP_TOKEN }}
-#          publishDeployment: ${{ secrets.SEMGREP_DEPLOYMENT_ID }}
-#          generateSarif: "1"
-#
-#      # Upload SARIF file generated in previous step
-#      - name: Upload SARIF file
-#        uses: github/codeql-action/upload-sarif@v3
-#        with:
-#          sarif_file: semgrep.sarif
-#        if: always()
-
-#      - name: Upload SARIF file
-#        uses: github/codeql-action/upload-sarif@v3
-#        with:
-#          sarif_file: reports/semgrep-results.sarif
+            --sarif \
+            --autofix || true
+#          pwd; ls -la ; echo "ls reports"; ls -la reports \
+#          ls -l reports/semgrep-results.sarif || true
 
       - name: Upload Semgrep Results
         uses: actions/upload-artifact@v3
@@ -155,18 +135,18 @@ jobs:
           path: combined-reports/*
           retention-days: 14
 
-  cleanup:
-    needs: publish_security_reports
-    if: always()
-    runs-on: ubuntu-latest
-    steps:
-      - name: Remove temporary artifacts
-        uses: geekyeggo/delete-artifact@v4
-        with:
-          name: |
-            semgrep-results
-            zap-results
-          fail_action: false
+#  cleanup:
+#    needs: publish_security_reports
+#    if: always()
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Remove temporary artifacts
+#        uses: geekyeggo/delete-artifact@v4
+#        with:
+#          name: |
+#            semgrep-results
+#            zap-results
+#          fail_action: false
 
 #  notify:
 #    needs: [semgrep, zap_scan]
