@@ -67,8 +67,7 @@ jobs:
           commit-message: 'fix: auto-fixes from semgrep'
           title: 'Semgrep Auto-fixes'
           body: |
-            Автоматические исправления от Semgrep security scan
-            
+            Автоматические исправления от Semgrep security scan         
             Этот PR содержит автоматические исправления проблем безопасности, найденных Semgrep.
             Пожалуйста, проверьте изменения перед merge.
           branch: semgrep-fixes

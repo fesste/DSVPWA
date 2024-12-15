@@ -28,7 +28,6 @@ class Attack():
     def run(self):
         pass
 
-
 class SQLinjection(Attack):
     def run(self, handler):
         params = handler.params
